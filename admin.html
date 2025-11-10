@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Velozza — Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body{background:#070707;color:#eee;font-family:Inter,system-ui,Arial}.input{background:#0f0f0f;border:1px solid #222;padding:.5rem;border-radius:.375rem}</style>
+</head>
+<body class="p-6">
+  <div class="max-w-3xl mx-auto">
+    <h1 class="text-2xl font-semibold mb-4">Velozza — Shows Admin</h1>
+
+    <div id="loginBox" class="mb-6">
+      <p class="text-gray-400 mb-2">Enter an admin password (or set one). Password is stored hashed in this browser's localStorage.</p>
+      <input id="pw" type="password" class="input w-full mb-2" placeholder="Set or enter password">
+      <div class="flex gap-2">
+        <button id="loginBtn" class="px-4 py-2 bg-[var(--accent)] text-white rounded">Unlock</button>
+        <button id="setBtn" class="px-4 py-2 border rounded">Set as new password</button>
+        <button id="logoutBtn" class="px-4 py-2 border rounded">Logout</button>
+      </div>
+      <p class="text-xs text-gray-500 mt-2">Important: This is client-side only. If you need multi-user or server-side auth later we can add a proper backend.</p>
+    </div>
+
+    <div id="adminUI" class="hidden">
+      <h2 class="text-lg font-semibold mb-2">Add / manage events</h2>
+
+      <form id="addForm" class="grid grid-cols-1 gap-2 mb-4">
+        <input id="date" type="date" class="input" required>
+        <input id="event" placeholder="Event title" class="input" required>
+        <input id="venue" placeholder="Venue" class="input">
+        <input id="city" placeholder="City" class="input">
+        <input id="country" placeholder="Country" class="input">
+        <div class="flex gap-2">
+          <button class="px-4 py-2 bg-[var(--accent)] text-white rounded" type="submit">Add Event</button>
+          <button id="exportBtn" type="button" class="px-4 py-2 border rounded">Export JSON</button>
+          <label class="px-4 py-2 border rounded cursor-pointer">Import <input id="importFile" type="file" accept=".json" class="hidden"></label>
+        </div>
+      </form>
+
+      <h3 class="font-semibold mb-2">All stored events</h3>
+      <div id="eventsList" class="space-y-2"></div>
+
+      <p class="text-xs text-gray-500 mt-4">Events are stored in localStorage for this browser only. Export to move to another device.</p>
+    </div>
+  </div>
+
+<script>
+  const STORAGE_KEY = 'velozza_events_v1';
+  const PW_KEY = 'velozza_admin_pw_v1';
+
+  // Hash function (SHA-256) via SubtleCrypto
+  async function hashText(text){
+    const enc = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+
+  function loadEvents(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') } catch(e){ return [] } }
+  function saveEvents(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)) }
+
+  async function checkPassword(input){
+    const stored = localStorage.getItem(PW_KEY);
+    if(!stored) return false;
+    const h = await hashText(input);
+    return h === stored;
+  }
+  async function setPassword(input){
+    const h = await hashText(input);
+    localStorage.setItem(PW_KEY, h);
+  }
+
+  document.getElementById('setBtn').addEventListener('click', async ()=>{
+    const val = document.getElementById('pw').value.trim();
+    if(!val){ alert('Enter a password to set.'); return; }
+    if(!confirm('Store this password (hashed) in this browser?')) return;
+    await setPassword(val);
+    alert('Password set. Use it to unlock admin UI.');
+  });
+
+  document.getElementById('loginBtn').addEventListener('click', async ()=>{
+    const val = document.getElementById('pw').value.trim();
+    if(!val){ alert('Enter password.'); return; }
+    const ok = await checkPassword(val);
+    if(!ok){ alert('Wrong password.'); return; }
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('adminUI').classList.remove('hidden');
+    renderEventsAdmin();
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+    document.getElementById('pw').value = '';
+    document.getElementById('loginBox').classList.remove('hidden');
+    document.getElementById('adminUI').classList.add('hidden');
+  });
+
+  // Add event
+  document.getElementById('addForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const date = document.getElementById('date').value;
+    const title = document.getElementById('event').value.trim();
+    const venue = document.getElementById('venue').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const country = document.getElementById('country').value.trim();
+    if(!date || !title){ alert('Date and title required'); return; }
+    const arr = loadEvents();
+    arr.push({ date, event: title, venue, city, country });
+    saveEvents(arr);
+    renderEventsAdmin();
+    alert('Event added.');
+    document.getElementById('addForm').reset();
+  });
+
+  function renderEventsAdmin(){
+    const arr = loadEvents().slice().sort((a,b)=> a.date.localeCompare(b.date));
+    const container = document.getElementById('eventsList');
+    container.innerHTML = '';
+    if(arr.length === 0){ container.innerHTML = '<div class="text-gray-400">No events saved.</div>'; return; }
+    arr.forEach((ev, idx)=>{
+      const el = document.createElement('div');
+      el.className = 'p-2 border rounded border-white/5 flex justify-between';
+      el.innerHTML = `<div>
+        <div class="text-sm text-gray-400">${ev.date}</div>
+        <div class="font-semibold">${ev.event}</div>
+        <div class="text-xs text-gray-400">${ev.venue} — ${ev.city}, ${ev.country}</div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <button data-idx="${idx}" class="editBtn px-3 py-1 border rounded small">Edit</button>
+        <button data-idx="${idx}" class="delBtn px-3 py-1 border rounded small">Delete</button>
+      </div>`;
+      container.appendChild(el);
+    });
+
+    // handlers
+    container.querySelectorAll('.delBtn').forEach(btn=> btn.addEventListener('click', ()=>{
+      const idx = Number(btn.getAttribute('data-idx'));
+      if(!confirm('Delete this event?')) return;
+      const arr = loadEvents();
+      arr.splice(idx,1);
+      saveEvents(arr);
+      renderEventsAdmin();
+    }));
+
+    container.querySelectorAll('.editBtn').forEach(btn=> btn.addEventListener('click', ()=>{
+      const idx = Number(btn.getAttribute('data-idx'));
+      const arr = loadEvents();
+      const ev = arr[idx];
+      const newTitle = prompt('Edit event title', ev.event);
+      if(newTitle === null) return;
+      ev.event = newTitle.trim() || ev.event;
+      const newDate = prompt('Edit date (YYYY-MM-DD)', ev.date);
+      if(newDate === null) return;
+      ev.date = newDate;
+      ev.venue = prompt('Venue', ev.venue) || ev.venue;
+      ev.city = prompt('City', ev.city) || ev.city;
+      ev.country = prompt('Country', ev.country) || ev.country;
+      saveEvents(arr);
+      renderEventsAdmin();
+    }));
+  }
+
+  // Export / Import handlers
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
+    const data = loadEvents();
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'velozza_shows.json'; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('importFile').addEventListener('change', (e)=>{
+    const f = e.target.files[0]; if(!f) return;
+    const r = new FileReader();
+    r.onload = ()=>{
+      try{
+        const parsed = JSON.parse(r.result);
+        if(Array.isArray(parsed)){
+          saveEvents(parsed);
+          alert('Imported '+parsed.length+' events.');
+          renderEventsAdmin();
+        } else alert('JSON must be an array of events.');
+      }catch(err){ alert('Invalid JSON file.'); }
+    };
+    r.readAsText(f);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Velozza — Official</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{--accent:#d11a12;--muted:#bdbdbd}
+    body{background:#050505;color:#eee;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    .glow{filter:drop-shadow(0 6px 20px rgba(209,26,18,0.25))}
+    .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+    .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+    .small{font-size:.95rem}
+  </style>
+</head>
+<body class="antialiased leading-relaxed">
+  <header class="max-w-6xl mx-auto px-6 py-8">
+    <nav class="flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <!-- Use the 'materiaal' folder as requested -->
+        <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza" class="h-20 glow" />
+        <div class="text-sm text-gray-400">Velozza — Thrash Metal from Roermond</div>
+      </div>
+      <div class="space-x-4 text-sm">
+        <a href="#music" class="hover:text-white">Music</a>
+        <a href="#shows" class="hover:text-white">Shows</a>
+        <a href="#merch" class="hover:text-white">Merch</a>
+        <a href="#about" class="hover:text-white">About</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="bg-black/40 border-t border-b border-white/5 py-20">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+        <img 
+        src="materiaal/velozza_distressed_logo-transparant2.png" 
+        alt="Velozza logo" 
+        class="mx-auto w-full max-w-[1080px] h-auto" 
+        />
+      <p class="mt-6 text-gray-300 max-w-2xl mx-auto">Raw, uncompromising thrash from Roermond. New full-length album coming early 2026.</p>
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="https://open.spotify.com/artist/1jnRNkkxVD5IHcPbOa3u0W" target="_blank" class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-white/5">Listen on Spotify</a>
+        <a href="https://www.youtube.com/@velozzaofficial" target="_blank" class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-white/5">YouTube channel</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="max-w-6xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+      <div class="md:col-span-2">
+        <h2 class="text-3xl font-semibold">About Velozza</h2>
+        <p class="mt-4 text-gray-300">Velozza is a thrash metal band from Roermond, the Netherlands, formed in 2016. The four members — Bas (lead guitar), Rob (drums), Jos (guitar & vocals), and Ron (bass) — deliver raw, uncompromising thrash that channels the spirit of the ’80s while carving out a sound of their own.</p>
+        <p class="mt-3 text-gray-300">Their music fuses relentless riffs, driving drums, sharp solos, and vocals that cut between raw power and precision. On stage, Velozza is known for high-intensity performances where new material collides with fan favorites.</p>
+      </div>
+      <div class="md:col-span-1">
+        <img src="materiaal/Velozza-021.jpg" alt="Velozza band" class="w-full rounded shadow-lg object-cover h-64" />
+      </div>
+    </div>
+  </section>
+
+  <section id="music" class="border-t border-white/5 py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-2xl font-semibold">Music</h3>
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h4 class="text-sm uppercase text-gray-400 mb-3">Spotify</h4>
+          <div class="rounded overflow-hidden border border-white/5">
+            <iframe src="https://open.spotify.com/embed/artist/1jnRNkkxVD5IHcPbOa3u0W" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm uppercase text-gray-400 mb-3">YouTube</h4>
+          <div class="mt-4 grid grid-cols-3 gap-3" id="yt-thumbs">
+            <button data-video="2C4_i7uBcJs" class="block bg-white/3 p-3 rounded text-center text-xs">Play video 1</button>
+            <button data-video="B5QF83CZvEI" class="block bg-white/3 p-3 rounded text-center text-xs">Play video 2</button>
+            <button data-video="Fk4BFv5bayM" class="block bg-white/3 p-3 rounded text-center text-xs">Play video 3</button>
+          </div>
+
+          <div class="mt-4 video-wrap rounded overflow-hidden border border-white/5">
+            <!-- default embed = first video -->
+            <iframe id="yt-embed" src="https://www.youtube.com/embed/2C4_i7uBcJs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shows section: lists are created from localStorage, admin.html can add/edit -->
+  <section id="shows" class="max-w-6xl mx-auto px-6 py-12">
+    <h3 class="text-2xl font-semibold mb-4">Shows</h3>
+
+    <div class="flex gap-4 mb-6">
+      <button id="upcomingBtn" class="px-4 py-2 bg-[var(--accent)] text-white text-sm rounded">Upcoming Shows</button>
+      <button id="pastBtn" class="px-4 py-2 bg-gray-700 text-white text-sm rounded">Past Shows</button>
+    </div>
+
+    <div id="upcomingList" class="grid gap-3"></div>
+    <div id="pastList" class="grid gap-3 mt-6 hidden"></div>
+
+    <div class="mt-6 flex gap-3 small text-gray-400">
+      <button id="exportBtn" class="hidden">Export JSON</button>
+      <label class="hidden">Import JSON <input id="importFile" type="file" accept=".json" class="hidden"></label>
+      <button id="clearBtn" class="hidden"></button>
+    </div>
+  </section>
+
+  <section id="merch" class="border-t border-white/5 py-12">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-2xl font-semibold mb-4">Merchandise</h3>
+      <p class="text-gray-300 mb-6">Official Velozza merchandise — shirts, vinyl, and more available through Bandcamp.</p>
+      <a href="https://velozza.bandcamp.com/merch" target="_blank" class="inline-block px-8 py-3 bg-[var(--accent)] text-white rounded font-semibold hover:bg-red-700 transition">Visit Merch Store</a>
+    </div>
+  </section>
+
+  <footer id="contact" class="border-t border-white/5 py-12">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <h4 class="text-sm text-gray-400">Contact</h4>
+        <p class="text-gray-300 mt-2 text-sm">For bookings & press: <a href="mailto:velozza@outlook.com" class="underline">velozza@outlook.com</a></p>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://facebook.com/Velozzaband" target="_blank" class="text-gray-400 text-sm">Facebook</a>
+        <a href="https://instagram.com/velozzaofficial" target="_blank" class="text-gray-400 text-sm">Instagram</a>
+        <a href="https://velozza.bandcamp.com/" target="_blank" class="text-gray-400 text-sm">Bandcamp</a>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 mt-8 text-xs text-gray-600">© Velozza — All rights reserved.</div>
+  </footer>
+
+  <script>
+    // localStorage-based events system
+    const STORAGE_KEY = 'velozza_events_v1';
+
+    function loadEvents(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') } catch(e){ return [] } }
+    function saveEvents(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)) }
+
+    // parse YYYY-MM-DD to local Date at midnight
+    function parseDateLocal(dstr){
+      const [y,m,day] = dstr.split('-').map(Number);
+      return new Date(y, m-1, day, 0,0,0,0);
+    }
+    function formatDate(dstr){
+      const d = parseDateLocal(dstr);
+      return d.toLocaleDateString(undefined, { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+    }
+
+    function renderLists(){
+      const events = loadEvents().slice().sort((a,b)=> a.date.localeCompare(b.date));
+      const today = new Date(); today.setHours(0,0,0,0);
+
+      const upcoming = events.filter(e => parseDateLocal(e.date) >= today );
+      const past = events.filter(e => parseDateLocal(e.date) < today ).reverse();
+
+      const upEl = document.getElementById('upcomingList');
+      const pastEl = document.getElementById('pastList');
+      upEl.innerHTML = ''; pastEl.innerHTML = '';
+
+      if(upcoming.length === 0) upEl.innerHTML = '<div class="text-gray-500">No upcoming shows.</div>';
+      upcoming.forEach(ev => {
+        const card = document.createElement('div');
+        card.className = 'p-3 border rounded border-white/5';
+        card.innerHTML = `<div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
+                          <div class="font-semibold">${ev.event}</div>
+                          <div class="small text-gray-400">${ev.venue} — ${ev.city}, ${ev.country}</div>`;
+        upEl.appendChild(card);
+      });
+
+      if(past.length === 0) pastEl.innerHTML = '<div class="text-gray-500">No past shows.</div>';
+      past.forEach(ev => {
+        const card = document.createElement('div');
+        card.className = 'p-3 border rounded border-white/5';
+        card.innerHTML = `<div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
+                          <div class="font-semibold">${ev.event}</div>
+                          <div class="small text-gray-400">${ev.venue} — ${ev.city}, ${ev.country}</div>`;
+        pastEl.appendChild(card);
+      });
+    }
+
+    // UI buttons
+    document.getElementById('upcomingBtn').addEventListener('click', ()=> {
+      document.getElementById('upcomingList').classList.remove('hidden');
+      document.getElementById('pastList').classList.add('hidden');
+      document.getElementById('upcomingBtn').classList.add('bg-[var(--accent)]');
+      document.getElementById('pastBtn').classList.remove('bg-[var(--accent)]');
+    });
+    document.getElementById('pastBtn').addEventListener('click', ()=> {
+      document.getElementById('pastList').classList.remove('hidden');
+      document.getElementById('upcomingList').classList.add('hidden');
+      document.getElementById('pastBtn').classList.add('bg-[var(--accent)]');
+      document.getElementById('upcomingBtn').classList.remove('bg-[var(--accent)]');
+    });
+
+    // export / import / clear
+    document.getElementById('exportBtn').addEventListener('click', ()=> {
+      const data = loadEvents();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'velozza_shows.json'; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('importFile').addEventListener('change', (e)=> {
+      const f = e.target.files[0]; if(!f) return;
+      const r = new FileReader();
+      r.onload = ()=> {
+        try {
+          const parsed = JSON.parse(r.result);
+          if(Array.isArray(parsed)) {
+            saveEvents(parsed);
+            renderLists();
+            alert('Imported ' + parsed.length + ' events.');
+          } else alert('JSON must be an array of events.');
+        } catch(err){ alert('Invalid JSON file.'); }
+      };
+      r.readAsText(f);
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', ()=> {
+      if(confirm('Clear ALL stored events? This cannot be undone.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        renderLists();
+      }
+    });
+
+    // YouTube click -> replace embed
+    document.getElementById('yt-thumbs').addEventListener('click', function(e){
+      const btn = e.target.closest('button[data-video]');
+      if(!btn) return;
+      const id = btn.getAttribute('data-video');
+      document.getElementById('yt-embed').src = 'https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1';
+    });
+
+    // initial render
+    renderLists();
+  </script>
+</body>
+</html>
