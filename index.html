@@ -162,7 +162,11 @@
         <div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
         <div class="font-semibold">${ev.name}</div>
         <div class="small text-gray-400">
-          ${ev.location||''} ${ev.location?'—':''} ${ev.city||''} ${ev.country||''} ${ev.time?'— '+ev.time:''}
+          ${
+            [ev.location, ev.city, ev.country, ev.time]
+              .filter(v => v && v.trim())        // remove empty values
+              .join(' — ')                       // add dashes ONLY between items
+          }
         </div>
         ${ev.link?`<div><a href="${ev.link}" target="_blank" class="text-blue-500 underline">Event Link</a></div>`:''}
       `;
@@ -177,7 +181,11 @@
         <div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
         <div class="font-semibold">${ev.name}</div>
         <div class="small text-gray-400">
-          ${ev.location||''} ${ev.location?'—':''} ${ev.city||''} ${ev.country||''} ${ev.time?'— '+ev.time:''}
+          ${
+            [ev.location, ev.city, ev.country, ev.time]
+              .filter(v => v && v.trim())        // remove empty values
+              .join(' — ')                       // add dashes ONLY between items
+          }
         </div>
         ${ev.link?`<div><a href="${ev.link}" target="_blank" class="text-blue-500 underline">Event Link</a></div>`:''}
       `;
