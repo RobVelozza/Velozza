@@ -88,6 +88,7 @@
     <input type="text" id="eventName" placeholder="Event name" />
     <input type="text" id="eventLocation" placeholder="Location" />
     <input type="text" id="eventCity" placeholder="City" />
+    <input type="text" id="eventCountry" placeholder="Country" />
     <input type="text" id="eventTime" placeholder="Time (optional)" />
     <input type="text" id="eventLink" placeholder="Ticket link (optional)" />
 
@@ -152,6 +153,7 @@
       const name = document.getElementById("eventName").value.trim();
       const location = document.getElementById("eventLocation").value.trim();
       const city = document.getElementById("eventCity").value.trim();
+      const country = document.getElementById("eventCountry").value.trim();      
       const time = document.getElementById("eventTime").value.trim();
       const link = document.getElementById("eventLink").value.trim();
 
@@ -165,6 +167,7 @@
         name,
         location,
         city,
+        country,
         time,
         link,
         createdAt: Date.now()
@@ -175,6 +178,7 @@
       document.getElementById("eventName").value = "";
       document.getElementById("eventLocation").value = "";
       document.getElementById("eventCity").value = "";
+      document.getElementById("eventCountry").value = "";
       document.getElementById("eventTime").value = "";
       document.getElementById("eventLink").value = "";
     };
