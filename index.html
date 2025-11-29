@@ -18,7 +18,6 @@
   <header class="max-w-6xl mx-auto px-6 py-8">
     <nav class="flex items-center justify-between">
       <div class="flex items-center gap-4">
-        <!-- Use the 'materiaal' folder as requested -->
         <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza" class="h-20 glow" />
         <div class="text-sm text-gray-400">Velozza — Thrash Metal from Roermond</div>
       </div>
@@ -34,11 +33,7 @@
 
   <section class="bg-black/40 border-t border-b border-white/5 py-20">
     <div class="max-w-5xl mx-auto px-6 text-center">
-        <img 
-        src="materiaal/velozza_distressed_logo-transparant2.png" 
-        alt="Velozza logo" 
-        class="mx-auto w-full max-w-[1080px] h-auto" 
-        />
+      <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza logo" class="mx-auto w-full max-w-[1080px] h-auto" />
       <p class="mt-6 text-gray-300 max-w-2xl mx-auto">Raw, uncompromising thrash from Roermond. New full-length album coming early 2026.</p>
       <div class="mt-8 flex justify-center gap-4">
         <a href="https://open.spotify.com/artist/1jnRNkkxVD5IHcPbOa3u0W" target="_blank" class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-white/5">Listen on Spotify</a>
@@ -80,7 +75,6 @@
           </div>
 
           <div class="mt-4 video-wrap rounded overflow-hidden border border-white/5">
-            <!-- default embed = first video -->
             <iframe id="yt-embed" src="https://www.youtube.com/embed/2C4_i7uBcJs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
@@ -88,7 +82,7 @@
     </div>
   </section>
 
-  <!-- Shows section: lists are created from localStorage, admin.html can add/edit -->
+  <!-- Shows section: powered by Firestore -->
   <section id="shows" class="max-w-6xl mx-auto px-6 py-12">
     <h3 class="text-2xl font-semibold mb-4">Shows</h3>
 
@@ -99,12 +93,6 @@
 
     <div id="upcomingList" class="grid gap-3"></div>
     <div id="pastList" class="grid gap-3 mt-6 hidden"></div>
-
-    <div class="mt-6 flex gap-3 small text-gray-400">
-      <button id="exportBtn" class="hidden">Export JSON</button>
-      <label class="hidden">Import JSON <input id="importFile" type="file" accept=".json" class="hidden"></label>
-      <button id="clearBtn" class="hidden"></button>
-    </div>
   </section>
 
   <section id="merch" class="border-t border-white/5 py-12">
@@ -130,111 +118,109 @@
     <div class="max-w-6xl mx-auto px-6 mt-8 text-xs text-gray-600">© Velozza — All rights reserved.</div>
   </footer>
 
-  <script>
-    // localStorage-based events system
-    const STORAGE_KEY = 'velozza_events_v1';
+  <!-- Firebase + application logic -->
+<script type="module">
+  // 🔥 Firebase imports
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-    function loadEvents(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') } catch(e){ return [] } }
-    function saveEvents(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)) }
+  // 🔥 Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAj7nzvflTuXerUQ9LzOnn7TRojw4ZHlkc",
+    authDomain: "velozza-events.firebaseapp.com",
+    projectId: "velozza-events",
+    storageBucket: "velozza-events.firebasestorage.app",
+    messagingSenderId: "125892769650",
+    appId: "1:125892769650:web:81deb40d2b0a7e7bb58feb",
+    measurementId: "G-HS8GCH4040"
+  };
 
-    // parse YYYY-MM-DD to local Date at midnight
-    function parseDateLocal(dstr){
-      const [y,m,day] = dstr.split('-').map(Number);
-      return new Date(y, m-1, day, 0,0,0,0);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const eventsColl = collection(db, "events");
+
+  function parseDateLocal(dstr){
+    const [y,m,day] = dstr.split('-').map(Number);
+    return new Date(y, m-1, day, 0,0,0,0);
+  }
+
+  function formatDate(dstr){
+    const d = parseDateLocal(dstr);
+    return d.toLocaleDateString(undefined, { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+  }
+
+  function renderEventsInto(upcoming, past){
+    const upEl = document.getElementById('upcomingList');
+    const pastEl = document.getElementById('pastList');
+    upEl.innerHTML = ''; pastEl.innerHTML = '';
+
+    if(upcoming.length===0) upEl.innerHTML = '<div class="text-gray-500">No upcoming shows.</div>';
+    upcoming.forEach(ev=>{
+      const card = document.createElement('div');
+      card.className='p-3 border rounded border-white/5';
+      card.innerHTML=`
+        <div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
+        <div class="font-semibold">${ev.name}</div>
+        <div class="small text-gray-400">
+          ${ev.location||''} ${ev.location?'—':''} ${ev.city||''} ${ev.time?'— '+ev.time:''}
+        </div>
+        ${ev.link?`<div><a href="${ev.link}" target="_blank" class="text-blue-500 underline">Event Link</a></div>`:''}
+      `;
+      upEl.appendChild(card);
+    });
+
+    if(past.length===0) pastEl.innerHTML = '<div class="text-gray-500">No past shows.</div>';
+    past.forEach(ev=>{
+      const card = document.createElement('div');
+      card.className='p-3 border rounded border-white/5';
+      card.innerHTML=`
+        <div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
+        <div class="font-semibold">${ev.name}</div>
+        <div class="small text-gray-400">
+          ${ev.location||''} ${ev.location?'—':''} ${ev.city||''} ${ev.time?'— '+ev.time:''}
+        </div>
+        ${ev.link?`<div><a href="${ev.link}" target="_blank" class="text-blue-500 underline">Event Link</a></div>`:''}
+      `;
+      pastEl.appendChild(card);
+    });
+  }
+
+  document.getElementById('upcomingBtn').addEventListener('click',()=>{
+    document.getElementById('upcomingList').classList.remove('hidden');
+    document.getElementById('pastList').classList.add('hidden');
+    document.getElementById('upcomingBtn').classList.add('bg-[var(--accent)]');
+    document.getElementById('pastBtn').classList.remove('bg-[var(--accent)]');
+  });
+  document.getElementById('pastBtn').addEventListener('click',()=>{
+    document.getElementById('pastList').classList.remove('hidden');
+    document.getElementById('upcomingList').classList.add('hidden');
+    document.getElementById('pastBtn').classList.add('bg-[var(--accent)]');
+    document.getElementById('upcomingBtn').classList.remove('bg-[var(--accent)]');
+  });
+
+  const q = query(eventsColl, orderBy("date","asc"));
+  onSnapshot(q, snap=>{
+    const docs = snap.docs.map(d=>({id:d.id,...d.data()}));
+    const today = new Date(); today.setHours(0,0,0,0);
+    const upcoming = docs.filter(e=>parseDateLocal(e.date)>=today);
+    const past = docs.filter(e=>parseDateLocal(e.date)<today).reverse();
+    renderEventsInto(upcoming,past);
+  }, err=>{
+    console.error('Firestore snapshot error',err);
+    document.getElementById('upcomingList').innerHTML='<div class="text-red-400">Could not load shows.</div>';
+  });
+
+  document.getElementById('upcomingBtn').click();
+</script>
+
+<script>
+  document.getElementById('yt-thumbs').addEventListener('click', e=>{
+    if(e.target.tagName==='BUTTON'){
+      const videoId=e.target.getAttribute('data-video');
+      document.getElementById('yt-embed').src=`https://www.youtube.com/embed/${videoId}`;
     }
-    function formatDate(dstr){
-      const d = parseDateLocal(dstr);
-      return d.toLocaleDateString(undefined, { weekday:'short', year:'numeric', month:'short', day:'numeric' });
-    }
+  });
+</script>
 
-    function renderLists(){
-      const events = loadEvents().slice().sort((a,b)=> a.date.localeCompare(b.date));
-      const today = new Date(); today.setHours(0,0,0,0);
-
-      const upcoming = events.filter(e => parseDateLocal(e.date) >= today );
-      const past = events.filter(e => parseDateLocal(e.date) < today ).reverse();
-
-      const upEl = document.getElementById('upcomingList');
-      const pastEl = document.getElementById('pastList');
-      upEl.innerHTML = ''; pastEl.innerHTML = '';
-
-      if(upcoming.length === 0) upEl.innerHTML = '<div class="text-gray-500">No upcoming shows.</div>';
-      upcoming.forEach(ev => {
-        const card = document.createElement('div');
-        card.className = 'p-3 border rounded border-white/5';
-        card.innerHTML = `<div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
-                          <div class="font-semibold">${ev.event}</div>
-                          <div class="small text-gray-400">${ev.venue} — ${ev.city}, ${ev.country}</div>`;
-        upEl.appendChild(card);
-      });
-
-      if(past.length === 0) pastEl.innerHTML = '<div class="text-gray-500">No past shows.</div>';
-      past.forEach(ev => {
-        const card = document.createElement('div');
-        card.className = 'p-3 border rounded border-white/5';
-        card.innerHTML = `<div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
-                          <div class="font-semibold">${ev.event}</div>
-                          <div class="small text-gray-400">${ev.venue} — ${ev.city}, ${ev.country}</div>`;
-        pastEl.appendChild(card);
-      });
-    }
-
-    // UI buttons
-    document.getElementById('upcomingBtn').addEventListener('click', ()=> {
-      document.getElementById('upcomingList').classList.remove('hidden');
-      document.getElementById('pastList').classList.add('hidden');
-      document.getElementById('upcomingBtn').classList.add('bg-[var(--accent)]');
-      document.getElementById('pastBtn').classList.remove('bg-[var(--accent)]');
-    });
-    document.getElementById('pastBtn').addEventListener('click', ()=> {
-      document.getElementById('pastList').classList.remove('hidden');
-      document.getElementById('upcomingList').classList.add('hidden');
-      document.getElementById('pastBtn').classList.add('bg-[var(--accent)]');
-      document.getElementById('upcomingBtn').classList.remove('bg-[var(--accent)]');
-    });
-
-    // export / import / clear
-    document.getElementById('exportBtn').addEventListener('click', ()=> {
-      const data = loadEvents();
-      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'velozza_shows.json'; a.click();
-      URL.revokeObjectURL(url);
-    });
-
-    document.getElementById('importFile').addEventListener('change', (e)=> {
-      const f = e.target.files[0]; if(!f) return;
-      const r = new FileReader();
-      r.onload = ()=> {
-        try {
-          const parsed = JSON.parse(r.result);
-          if(Array.isArray(parsed)) {
-            saveEvents(parsed);
-            renderLists();
-            alert('Imported ' + parsed.length + ' events.');
-          } else alert('JSON must be an array of events.');
-        } catch(err){ alert('Invalid JSON file.'); }
-      };
-      r.readAsText(f);
-    });
-
-    document.getElementById('clearBtn').addEventListener('click', ()=> {
-      if(confirm('Clear ALL stored events? This cannot be undone.')) {
-        localStorage.removeItem(STORAGE_KEY);
-        renderLists();
-      }
-    });
-
-    // YouTube click -> replace embed
-    document.getElementById('yt-thumbs').addEventListener('click', function(e){
-      const btn = e.target.closest('button[data-video]');
-      if(!btn) return;
-      const id = btn.getAttribute('data-video');
-      document.getElementById('yt-embed').src = 'https://www.youtube.com/embed/' + id + '?rel=0&autoplay=1';
-    });
-
-    // initial render
-    renderLists();
-  </script>
 </body>
 </html>
