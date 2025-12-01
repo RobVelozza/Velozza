@@ -122,16 +122,16 @@
     // ---------------------------
 
     // Correct SHA-256 hash for:  R7pX92fGq4mT8bLd
-    const ADMIN_HASH = "ff71c7b458fafa4cb1cca103fe278b42cd9e6b6e4fbde3ca8a076cc473895f96";
+    // const ADMIN_HASH = "ff71c7b458fafa4cb1cca103fe278b42cd9e6b6e4fbde3ca8a076cc473895f96";
 
-    async function sha256(message) {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(message.trim());
-      const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-      return [...new Uint8Array(hashBuffer)]
-        .map(b => b.toString(16).padStart(2, "0"))
-        .join("");
-    }
+    // async function sha256(message) {
+    //   const encoder = new TextEncoder();
+    //   const data = encoder.encode(message.trim());
+    //   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    //   return [...new Uint8Array(hashBuffer)]
+    //     .map(b => b.toString(16).padStart(2, "0"))
+    //     .join("");
+    // }
 
     document.getElementById("loginBtn").onclick = async () => {
       const pwd = document.getElementById("passwordInput").value.trim();
