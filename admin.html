@@ -135,14 +135,16 @@
 
     document.getElementById("loginBtn").onclick = async () => {
       const pwd = document.getElementById("passwordInput").value.trim();
-      const hashed = await sha256(pwd);
-
-      if (hashed === ADMIN_HASH) {
+      // const hashed = await sha256(pwd);
+      // if (hashed === ADMIN_HASH) {
+      if (pwd === "R7pX92fGq4mT8bLd") {
         document.getElementById("loginBox").classList.add("hidden");
         document.getElementById("adminPanel").classList.remove("hidden");
       } else {
         document.getElementById("loginError").textContent = "Incorrect password.";
       }
+
+
     };
 
     // ---------------------------
