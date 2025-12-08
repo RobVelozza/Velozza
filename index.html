@@ -12,32 +12,94 @@
     .video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
     .video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%}
     .small{font-size:.95rem}
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        rgba(0,0,0,0.4),
+        rgba(0,0,0,0.7)
+      );
+      z-index: 2;
+    }
+
+    .hero-logo {
+      position: relative;
+      z-index: 3;
+    }
+
   </style>
 </head>
 <body class="antialiased leading-relaxed">
-  <header class="max-w-6xl mx-auto px-6 py-8">
-    <nav class="flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza" class="h-20 glow" />
-        <div class="text-sm text-gray-400">Velozza — Thrash Metal from Roermond</div>
-      </div>
-      <div class="space-x-4 text-sm">
-        <a href="#music" class="hover:text-white">Music</a>
-        <a href="#shows" class="hover:text-white">Shows</a>
-        <a href="#merch" class="hover:text-white">Merch</a>
-        <a href="#about" class="hover:text-white">About</a>
-        <a href="#contact" class="hover:text-white">Contact</a>
-      </div>
-    </nav>
-  </header>
+  <!-- HERO VIDEO SECTION -->
+  <section class="relative w-full h-screen overflow-hidden">
 
-  <section class="bg-black/40 border-t border-b border-white/5 py-20">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza logo" class="mx-auto w-full max-w-[1080px] h-auto" />
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="materiaal/Velozza - Bankrupt the Republic.mp4" type="video/mp4">
+    </video>
+
+    <!-- Fade Overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Navigation -->
+    <header class="absolute top-0 inset-x-0 z-50 max-w-6xl mx-auto px-12 py-8">
+      <nav class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza" class="h-16 glow" />
+          <div class="text-sm text-gray-300">Velozza — Thrash Metal from Roermond</div>
+        </div>
+        <div class="space-x-4 text-sm">
+          <a href="#music" class="hover:text-white">Music</a>
+          <a href="#shows" class="hover:text-white">Shows</a>
+          <a href="#merch" class="hover:text-white">Merch</a>
+          <a href="#about" class="hover:text-white">About</a>
+          <a href="#contact" class="hover:text-white">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Centered Logo -->
+    <div class="hero-logo absolute inset-0 flex items-center justify-center">
+      <img 
+        src="materiaal/velozza_distressed_logo-transparant2.png" 
+        alt="Velozza Logo" 
+        class="w-full max-w-[700px] glow"
+      >
+    </div>
+    <div class="absolute inset-0 flex flex-col items-center justify-end pb-20 z-30">
       <p class="mt-6 text-gray-300 max-w-2xl mx-auto">Raw, uncompromising thrash from Roermond. New full-length album coming early 2026.</p>
       <div class="mt-8 flex justify-center gap-4">
-        <a href="https://open.spotify.com/artist/1jnRNkkxVD5IHcPbOa3u0W" target="_blank" class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-white/5">Listen on Spotify</a>
-        <a href="https://www.youtube.com/@velozzaofficial" target="_blank" class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-white/5">YouTube channel</a>
+        <a 
+          href="https://open.spotify.com/artist/1jnRNkkxVD5IHcPbOa3u0W" 
+          target="_blank" 
+          class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-[#d11a12] hover:border-[#d11a12] transition-colors duration-300">
+          Listen on Spotify
+        </a>
+        <a 
+          href="https://www.youtube.com/@velozzaofficial" 
+          target="_blank" 
+          class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-[#d11a12] hover:border-[#d11a12] transition-colors duration-300">
+          YouTube channel
+        </a>
+        <button 
+          id="openBookingsModal" 
+          class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-[#d11a12] hover:border-[#d11a12] transition-colors duration-300">
+          Bookings
+        </button>
       </div>
     </div>
   </section>
@@ -47,7 +109,7 @@
       <div class="md:col-span-2">
         <h2 class="text-3xl font-semibold">About Velozza</h2>
         <p class="mt-4 text-gray-300">Velozza is a thrash metal band from Roermond, the Netherlands, formed in 2016. The four members — Bas (lead guitar), Rob (drums), Jos (guitar & vocals), and Ron (bass) — deliver raw, uncompromising thrash that channels the spirit of the ’80s while carving out a sound of their own.</p>
-        <p class="mt-3 text-gray-300">Their music fuses relentless riffs, driving drums, sharp solos, and vocals that cut between raw power and precision. On stage, Velozza is known for high-intensity performances where new material collides with fan favorites.</p>
+        <p class="mt-3 text-gray-300">Prepare for an explosive onslaught of metal power! For fans of Slayer, Kreator, Havok. This quad delivers high- speed, heart-pounding songs and crushing, heavy anthems that leave metalheads breathless. Join the mosh pit and unleash your inner metal warrior as Velozza takes you on an thrashing journey, conquering the world one show at a time.</p>
       </div>
       <div class="md:col-span-1">
         <img src="materiaal/Velozza-021.jpg" alt="Velozza band" class="w-full rounded shadow-lg object-cover h-64" />
@@ -88,7 +150,7 @@
 
     <div class="flex gap-4 mb-6">
       <button id="upcomingBtn" class="px-4 py-2 bg-[var(--accent)] text-white text-sm rounded">Upcoming Shows</button>
-      <button id="pastBtn" class="px-4 py-2 bg-gray-700 text-white text-sm rounded">Past Shows</button>
+      <button id="pastBtn" class="px-4 py-2 bg-[var(--accent)] text-white text-sm rounded">Past Shows</button>
     </div>
 
     <div id="upcomingList" class="grid gap-3"></div>
@@ -229,6 +291,81 @@
     }
   });
 </script>
+<div 
+  id="bookingsModal" 
+  class="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-6 hidden transition-opacity duration-300"
+>
+  <div class="bg-gray-900 border border-white/10 rounded-lg max-w-3xl w-full p-8 relative max-h-[90vh] overflow-y-auto">
+    <button id="closeBookingsModal" class="absolute top-4 right-4 text-xl text-gray-400 hover:text-white">&times;</button>
+    
+    <h3 class="text-3xl font-bold mb-4 border-b border-gray-700 pb-2">Velozza Press & Booking Kit</h3>
+    
+    <div class="mb-6">
+      <h4 class="text-xl font-semibold mb-2">Official Bio</h4>
+      <a href="materiaal/Velozza - Bio.pdf" target="_blank" class="inline-block px-4 py-2 bg-[#d11a12] text-white rounded font-medium hover:bg-red-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block mr-2 align-text-bottom">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12-3 3m0 0 3 3m-3-3h12a2.25 2.25 0 002.25-2.25v-2.625c0-.621-.504-1.125-1.125-1.125H10.5m-3.75 7.5v-7.5m7.5 7.5v-7.5" />
+        </svg>
+        Download Bio (PDF)
+      </a>
+    </div>
 
+    <h4 class="text-xl font-semibold mb-4">Official Press Photos</h4>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="col-span-2 md:col-span-3">
+        <img src="materiaal/velozza-022.jpeg" alt="Velozza Group" class="w-full rounded-lg shadow-lg object-cover max-h-100" />
+        <p class="text-xs text-gray-500 mt-1 text-center">Velozza (Full Band)</p>
+      </div>
+      <div class="col-span-2 md:col-span-3">
+        <img src="materiaal/velozza-banner.png" alt="Velozza Group" class="w-full rounded-lg shadow-lg object-cover max-h-80" />
+        <p class="text-xs text-gray-500 mt-1 text-center">Velozza (banner)</p>
+      </div>
+      <div class="aspect-square">
+        <img src="materiaal/Velozza-Jos.jpg" alt="Jos" class="w-full h-full rounded-lg shadow-md object-cover" />
+        <p class="text-xs text-gray-500 mt-1 text-center">Jos (Guitar/Vocals)</p>
+      </div>
+      <div class="aspect-square">
+        <img src="materiaal/Velozza-Bas.jpg" alt="Bas" class="w-full h-full rounded-lg shadow-md object-cover" />
+        <p class="text-xs text-gray-500 mt-1 text-center">Bas (Lead Guitar)</p>
+      </div>
+      <div class="aspect-square">
+        <img src="materiaal/Velozza-Rob.jpg" alt="Rob" class="w-full h-full rounded-lg shadow-md object-cover" />
+        <p class="text-xs text-gray-500 mt-1 text-center">Rob (Drums)</p>
+      </div>
+      <div class="aspect-square">
+        <img src="materiaal/Velozza-Ron.jpg" alt="Ron" class="w-full h-full rounded-lg shadow-md object-cover" />
+        <p class="text-xs text-gray-500 mt-1 text-center">Ron (Bass)</p>
+      </div>
+    </div>
+  </div>
+  <script>
+  const openBtn = document.getElementById('openBookingsModal');
+  const closeBtn = document.getElementById('closeBookingsModal');
+  const modal = document.getElementById('bookingsModal');
+
+  function openModal() {
+    modal.classList.remove('hidden');
+    // Optional: Add a class for fade-in effect if needed
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+  }
+
+  // Open the modal when the Bookings button is clicked
+  openBtn.addEventListener('click', openModal);
+
+  // Close the modal when the X button is clicked
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close the modal when clicking outside the content area
+  modal.addEventListener('click', (e) => {
+    // Check if the click occurred directly on the modal backdrop (not on the content inside)
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+</script>
+</div>
 </body>
 </html>
