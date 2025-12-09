@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin – Velozza Events (CRUD)</title>
+  <title>Admin – Velozza Events</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{--accent:#d11a12;--muted:#bdbdbd}
@@ -77,7 +77,6 @@
     </div>
   </div>
 
-  <!-- FIREBASE + CRUD LOGIC -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
     import {
@@ -141,7 +140,6 @@
 
     let currentEditId = null;
 
-    // SIMPLE PASSWORD LOGIN (you can replace with Firebase Auth later)
     loginBtn.addEventListener('click', () => {
       const pwd = passwordInput.value.trim();
       if (pwd === 'R7pX92fGq4mT8bLd') {
@@ -153,7 +151,6 @@
       }
     });
 
-    // ADD EVENT
     saveEvent.addEventListener('click', async () => {
       const date = eventDate.value;
       const name = eventName.value.trim();
@@ -182,7 +179,6 @@
       }
     });
 
-    // SETUP REALTIME LISTENER
     function setupRealtimeList(){
       const q = query(collection(db, 'events'), orderBy('date', 'asc'));
       onSnapshot(q, snap => {
@@ -226,7 +222,6 @@
       });
     }
 
-    // OPEN EDIT MODAL
     async function openEditModal(id){
       currentEditId = id;
       try {
@@ -253,7 +248,6 @@
       }
     }
 
-    // CLOSE EDIT MODAL
     function closeEditModal(){
       currentEditId = null;
       editModal.classList.add('hidden');
@@ -261,13 +255,12 @@
 
     cancelEdit.addEventListener('click', closeEditModal);
 
-    // DELETE (from modal or list)
     async function deleteEvent(id){
       const ok = confirm('Are you sure you want to delete this event?');
       if (!ok) return;
       try {
         await deleteDoc(doc(db, 'events', id));
-        // if modal open for same id, close it
+
         if (currentEditId === id) closeEditModal();
       } catch (err) {
         console.error('Delete error', err);
@@ -280,7 +273,6 @@
       deleteEvent(currentEditId);
     });
 
-    // SAVE EDIT
     saveEdit.addEventListener('click', async () => {
       if (!currentEditId) return;
       const payload = {
@@ -307,12 +299,10 @@
       }
     });
 
-    // Close modal when clicking outside the card
     editModal.addEventListener('click', (e) => {
       if (e.target === editModal) closeEditModal();
     });
 
-    // Simple helper to avoid accidental HTML injection in list display (we still trust admins)
     function escapeHtml(str){
       if (!str) return '';
       return String(str).replace(/[&<>"']/g, function(m){
