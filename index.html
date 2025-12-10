@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,32 +6,33 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Velozza — Official</title>
 
-  <link rel="icon" type="image/png" href="materiaal/favicon.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="materiaal/favicon.png" sizes="192x192" />
 
-  <link rel="apple-touch-icon" href="materiaal/favicon.png">
+  <link rel="apple-touch-icon" href="materiaal/favicon.png" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
       --accent: #d11a12;
-      --muted: #bdbdbd
+      --muted: #bdbdbd;
     }
 
     body {
       background: #050505;
       color: #eee;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial;
     }
 
     .glow {
-      filter: drop-shadow(0 6px 20px rgba(209, 26, 18, 0.25))
+      filter: drop-shadow(0 6px 20px rgba(209, 26, 18, 0.25));
     }
 
     .video-wrap {
       position: relative;
       padding-bottom: 56.25%;
       height: 0;
-      overflow: hidden
+      overflow: hidden;
     }
 
     .video-wrap iframe {
@@ -39,11 +40,11 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%
+      height: 100%;
     }
 
     .small {
-      font-size: .95rem
+      font-size: 0.95rem;
     }
 
     .hero-video {
@@ -62,8 +63,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(rgba(0, 0, 0, 0.4),
-          rgba(0, 0, 0, 0.7));
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
       z-index: 2;
     }
 
@@ -76,40 +76,84 @@
     .header-hidden {
       transform: translateY(-100%);
     }
+
+    /* Inside your <style> block, after .hero-overlay for example */
+    .overlap-border {
+      /* Use negative margin to pull the next element up */
+      margin-top: -15px; /* Adjust this value to control the overlap depth */
+      margin-bottom: -15px;
+      position: relative;
+      z-index: 10; /* Ensure the image sits above the sections */
+    }
   </style>
 </head>
 
 <body class="antialiased leading-relaxed">
   <section class="relative w-full h-screen overflow-hidden">
     <video autoplay muted loop playsinline class="hero-video">
-      <source src="materiaal/Velozza - Bankrupt the Republic.mp4" type="video/mp4">
+      <source src="materiaal/Velozza - Bankrupt the Republic.mp4" type="video/mp4" />
     </video>
     <div class="hero-overlay"></div>
     <header id="mainHeader" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 hidden sm:block">
-      <div class="max-w-6xl mx-auto px-12 py-8">
+      <div class="max-w-6xl mx-auto px-12 py-4">
         <nav class="flex items-center justify-between">
           <div class="flex items-center gap-4">
-            <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza" class="h-16 glow" />
-            <div class="text-sm text-gray-300">Velozza — Thrash Metal from Roermond</div>
+            <img id="headerLogo" src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza" class="h-16 glow cursor-pointer" />
+            <div class="text-sm text-gray-300">
+              Velozza — Thrash Metal from Roermond
+            </div>
           </div>
-          <div class="space-x-4 text-sm">
-            <a href="#about" class="hover:text-white">About</a>
-            <a href="#music" class="hover:text-white">Music</a>
-            <a href="#shows" class="hover:text-white">Shows</a>
-            <a href="#merch" class="hover:text-white">Merch</a>
-            <a href="#contact" class="hover:text-white">Contact</a>
+
+          <div class="space-x-1 text-sm">
+
+            <a href="#about" class="
+            inline-block text-gray-300
+            px-3 py-2 rounded-lg 
+            transition-colors duration-300 
+            hover:bg-[#d11a12] hover:text-white
+        ">About</a>
+
+            <a href="#music" class="
+            inline-block text-gray-300
+            px-3 py-2 rounded-lg 
+            transition-colors duration-300 
+            hover:bg-[#d11a12] hover:text-white
+        ">Music</a>
+
+            <a href="#shows" class="
+            inline-block text-gray-300
+            px-3 py-2 rounded-lg 
+            transition-colors duration-300 
+            hover:bg-[#d11a12] hover:text-white
+        ">Shows</a>
+
+            <a href="#merch" class="
+            inline-block text-gray-300
+            px-3 py-2 rounded-lg 
+            transition-colors duration-300 
+            hover:bg-[#d11a12] hover:text-white
+        ">Merch</a>
+
+            <a href="#contact" class="
+            inline-block text-gray-300
+            px-3 py-2 rounded-lg 
+            transition-colors duration-300 
+            hover:bg-[#d11a12] hover:text-white
+        ">Contact</a>
           </div>
         </nav>
-
       </div>
     </header>
+
     <div class="hero-logo absolute inset-0 flex items-center justify-center">
       <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza Logo"
-        class="w-full max-w-[700px] glow">
+        class="w-full max-w-[700px] glow" />
     </div>
     <div class="absolute inset-0 flex flex-col items-center justify-end pb-20 z-30">
-      <p class="mt-6 text-gray-300 max-w-2xl mx-auto">Raw, uncompromising thrash from Roermond. New full-length album
-        coming early 2026.</p>
+      <p class="mt-6 text-gray-300 max-w-2xl mx-auto">
+        Raw, uncompromising thrash from Roermond. New full-length album coming
+        early 2026.
+      </p>
       <div class="mt-8 flex justify-center gap-4">
         <a href="https://open.spotify.com/artist/1jnRNkkxVD5IHcPbOa3u0W" target="_blank"
           class="px-6 py-3 rounded-md border border-white/10 text-sm font-medium hover:bg-[#d11a12] hover:border-[#d11a12] transition-colors duration-300">
@@ -127,22 +171,46 @@
     </div>
   </section>
 
-  <section id="about" class="max-w-6xl mx-auto px-6 py-12">
+  <img 
+    src="materiaal/icons/border1.png" 
+    class="w-full h-16 object-cover rotate-180 overlap-border relative z-10 mt-[0px] mb-[-30px]" 
+  />
+
+
+<section 
+  id="about" 
+  class="relative bg-[url('materiaal/velozza-banner.jpg')] bg-cover bg-center bg-no-repeat"
+>
+  <div class="max-w-6xl mx-auto px-6 py-24"> 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
       <div class="md:col-span-2">
         <h2 class="text-3xl font-semibold">About Velozza</h2>
-        <p class="mt-4 text-gray-300">Velozza is a thrash metal band from Roermond, the Netherlands, formed in 2016. The
-          four members — Bas (lead guitar), Rob (drums), Jos (guitar & vocals), and Ron (bass) — deliver raw,
-          uncompromising thrash that channels the spirit of the ’80s while carving out a sound of their own.</p>
-        <p class="mt-3 text-gray-300">Get ready for a surge of sharp, driving metal.
-          Fans of Slayer, Kreator, and Havok will feel right at home with this set. Fast, tight, and heavy from start to finish. 
-          Velozza delivers relentless riffs and commanding songs built for full-volume crowds. Step in, turn it up, and follow the band as they tear through stages one show at a time.</p>
-      </div>
-      <div class="md:col-span-1">
-        <img src="materiaal/Velozza-021.jpg" alt="Velozza band" class="w-full rounded shadow-lg object-cover h-64" />
+        <p class="mt-4 text-gray-300">
+          Velozza is a thrash metal band from Roermond, the Netherlands,
+          formed in 2016. The four members — Bas (lead guitar), Rob (drums),
+          Jos (guitar & vocals), and Ron (bass) — deliver raw, uncompromising
+          thrash that channels the spirit of the ’80s while carving out a
+          sound of their own.
+        </p>
+        <p class="mt-3 text-gray-300">
+          Get ready for a surge of sharp, driving metal. Fans of Slayer,
+          Kreator, and Havok will feel right at home with this set. Fast,
+          tight, and heavy from start to finish. Velozza delivers relentless
+          riffs and commanding songs built for full-volume crowds. Step in,
+          turn it up, and follow the band as they tear through stages one show
+          at a time.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+
+  <img 
+    src="materiaal/icons/border1.png" 
+    class="w-full h-16 object-cover overlap-border mt-[-30px]" 
+  />
+
 
   <section id="music" class="border-t border-white/5 py-12">
     <div class="max-w-6xl mx-auto px-6">
@@ -159,12 +227,15 @@
         <div>
           <h4 class="text-sm uppercase text-gray-400 mb-3">YouTube</h4>
           <div class="mt-4 grid grid-cols-3 gap-3" id="yt-thumbs">
-            <button data-video="B5QF83CZvEI" class="block bg-white/3 p-3 rounded text-center text-xs">Play video
-              1</button>
-            <button data-video="Fk4BFv5bayM" class="block bg-white/3 p-3 rounded text-center text-xs">Play video
-              2</button>
-            <button data-video="2C4_i7uBcJs" class="block bg-white/3 p-3 rounded text-center text-xs">Play video
-              3</button>
+            <button data-video="B5QF83CZvEI" class="block bg-white/3 p-3 rounded text-center text-xs">
+              Play video 1
+            </button>
+            <button data-video="Fk4BFv5bayM" class="block bg-white/3 p-3 rounded text-center text-xs">
+              Play video 2
+            </button>
+            <button data-video="2C4_i7uBcJs" class="block bg-white/3 p-3 rounded text-center text-xs">
+              Play video 3
+            </button>
           </div>
 
           <div class="mt-4 video-wrap rounded overflow-hidden border border-white/5">
@@ -178,23 +249,38 @@
     </div>
   </section>
 
-  <!-- Shows section: powered by Firestore -->
+  <img 
+    src="materiaal/icons/border1.png" 
+    class="w-full h-16 object-cover rotate-180 overlap-border" 
+  />
+
   <section id="shows" class="max-w-6xl mx-auto px-6 py-12">
     <h3 class="text-2xl font-semibold mb-4">Shows</h3>
 
     <div class="flex gap-4 mb-6">
-      <button id="upcomingBtn" class="px-4 py-2 bg-[var(--accent)] text-white text-sm rounded">Upcoming Shows</button>
-      <button id="pastBtn" class="px-4 py-2 bg-[var(--accent)] text-white text-sm rounded">Past Shows</button>
+      <button id="upcomingBtn" class="px-4 py-2 bg-[var(--accent)] text-white text-sm rounded">
+        Upcoming Shows
+      </button>
+      <button id="pastBtn" class="px-4 py-2 bg-[var(--accent)] text-white text-sm rounded">
+        Past Shows
+      </button>
     </div>
 
     <div id="upcomingList" class="grid gap-3"></div>
     <div id="pastList" class="grid gap-3 mt-6 hidden"></div>
   </section>
 
+  <img 
+    src="materiaal/icons/border1.png" 
+    class="w-full h-16 object-cover overlap-border" 
+  />
+
   <section id="merch" class="border-t border-white/5 py-12">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <h3 class="text-2xl font-semibold mb-4">Merchandise</h3>
-      <p class="text-gray-300 mb-6">Official Velozza merchandise — shirts, caps, and more available through Bandcamp.
+      <p class="text-gray-300 mb-6">
+        Official Velozza merchandise — shirts, caps, and more available
+        through Bandcamp.
       </p>
       <a href="https://velozza.bandcamp.com/merch" target="_blank"
         class="inline-block px-8 py-3 bg-[var(--accent)] text-white rounded font-semibold hover:bg-red-700 transition">Visit
@@ -202,27 +288,60 @@
     </div>
   </section>
 
+  <img 
+    src="materiaal/icons/border1.png" 
+    class="w-full h-16 object-cover rotate-180 overlap-border" 
+  />
+
   <footer id="contact" class="border-t border-white/5 py-12">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
       <div>
         <h4 class="text-sm text-gray-400">Contact</h4>
-        <p class="text-gray-300 mt-2 text-sm">For bookings & press: <a href="mailto:velozza@outlook.com"
-            class="underline">velozza@outlook.com</a></p>
+        <p class="text-gray-300 mt-2 text-sm">
+          For bookings & press:
+          <a href="mailto:velozza@outlook.com" class="underline">velozza@outlook.com</a>
+        </p>
       </div>
       <div class="flex items-center gap-4">
-        <a href="https://facebook.com/Velozzaband" target="_blank" class="text-gray-400 text-sm">Facebook</a>
-        <a href="https://instagram.com/velozzaofficial" target="_blank" class="text-gray-400 text-sm">Instagram</a>
-        <a href="https://velozza.bandcamp.com/" target="_blank" class="text-gray-400 text-sm">Bandcamp</a>
+        <a href="https://facebook.com/Velozzaband" target="_blank" class="
+            flex items-center justify-center 
+            w-10 h-10 rounded-lg 
+            transition-colors duration-300 
+            hover:bg-[#d11a12]
+          "><img src="materiaal/icons/facebook.svg" alt="Facebook Icon"
+            class="w-7 h-7 inline-block align-text-bottom" /></a>
+        <a href="https://instagram.com/velozzaofficial" target="_blank" class="
+            flex items-center justify-center 
+            w-10 h-10 rounded-lg 
+            transition-colors duration-300 
+            hover:bg-[#d11a12]
+          "><img src="materiaal/icons/instagram.svg" alt="Instagram Icon"
+            class="w-7 h-7 inline-block align-text-bottom" /></a>
+        <a href="https://velozza.bandcamp.com/" target="_blank" class="
+            flex items-center justify-center 
+            w-10 h-10 rounded-lg 
+            transition-colors duration-300 
+            hover:bg-[#d11a12]
+          "><img src="materiaal/icons/bandcamp.svg" alt="Bandcamp Icon"
+            class="w-7 h-7 inline-block align-text-bottom" /></a>
       </div>
     </div>
-    <div class="max-w-6xl mx-auto px-6 mt-8 text-xs text-gray-600">© Velozza — All rights reserved.</div>
+    <div class="max-w-6xl mx-auto px-6 mt-8 text-xs text-gray-600">
+      © Velozza — All rights reserved.
+    </div>
   </footer>
 
   <!-- Firebase + application logic -->
   <script type="module">
     // 🔥 Firebase imports
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import {
+      getFirestore,
+      collection,
+      onSnapshot,
+      query,
+      orderBy,
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
     // 🔥 Firebase config
     const firebaseConfig = {
@@ -232,7 +351,7 @@
       storageBucket: "velozza-events.firebasestorage.app",
       messagingSenderId: "125892769650",
       appId: "1:125892769650:web:81deb40d2b0a7e7bb58feb",
-      measurementId: "G-HS8GCH4040"
+      measurementId: "G-HS8GCH4040",
     };
 
     const app = initializeApp(firebaseConfig);
@@ -240,90 +359,121 @@
     const eventsColl = collection(db, "events");
 
     function parseDateLocal(dstr) {
-      const [y, m, day] = dstr.split('-').map(Number);
+      const [y, m, day] = dstr.split("-").map(Number);
       return new Date(y, m - 1, day, 0, 0, 0, 0);
     }
 
     function formatDate(dstr) {
       const d = parseDateLocal(dstr);
-      return d.toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+      return d.toLocaleDateString(undefined, {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
     }
 
     function renderEventsInto(upcoming, past) {
-      const upEl = document.getElementById('upcomingList');
-      const pastEl = document.getElementById('pastList');
-      upEl.innerHTML = ''; pastEl.innerHTML = '';
+      const upEl = document.getElementById("upcomingList");
+      const pastEl = document.getElementById("pastList");
+      upEl.innerHTML = "";
+      pastEl.innerHTML = "";
 
-      if (upcoming.length === 0) upEl.innerHTML = '<div class="text-gray-500">No upcoming shows.</div>';
-      upcoming.forEach(ev => {
-        const card = document.createElement('div');
-        card.className = 'p-3 border rounded border-white/5';
+      if (upcoming.length === 0)
+        upEl.innerHTML =
+          '<div class="text-gray-500">No upcoming shows.</div>';
+      upcoming.forEach((ev) => {
+        const card = document.createElement("div");
+        card.className = "p-3 border rounded border-white/5";
         card.innerHTML = `
         <div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
         <div class="font-semibold">${ev.name}</div>
         <div class="small text-gray-400">
           ${[ev.location, ev.city, ev.country, ev.time]
-            .filter(v => v && v.trim())        // remove empty values
-            .join(' — ')                       // add dashes ONLY between items
+            .filter((v) => v && v.trim()) // remove empty values
+            .join(" — ") // add dashes ONLY between items
           }
         </div>
-        ${ev.link ? `<div><a href="${ev.link}" target="_blank" class="text-blue-500 underline">Event Link</a></div>` : ''}
+        ${ev.link
+            ? `<div><a href="${ev.link}" target="_blank" class="text-blue-500 underline">Event Link</a></div>`
+            : ""
+          }
       `;
         upEl.appendChild(card);
       });
 
-      if (past.length === 0) pastEl.innerHTML = '<div class="text-gray-500">No past shows.</div>';
-      past.forEach(ev => {
-        const card = document.createElement('div');
-        card.className = 'p-3 border rounded border-white/5';
+      if (past.length === 0)
+        pastEl.innerHTML = '<div class="text-gray-500">No past shows.</div>';
+      past.forEach((ev) => {
+        const card = document.createElement("div");
+        card.className = "p-3 border rounded border-white/5";
         card.innerHTML = `
         <div class="text-sm text-gray-400">${formatDate(ev.date)}</div>
         <div class="font-semibold">${ev.name}</div>
         <div class="small text-gray-400">
           ${[ev.location, ev.city, ev.country, ev.time]
-            .filter(v => v && v.trim())        // remove empty values
-            .join(' — ')                       // add dashes ONLY between items
+            .filter((v) => v && v.trim()) // remove empty values
+            .join(" — ") // add dashes ONLY between items
           }
         </div>
-        ${ev.link ? `<div><a href="${ev.link}" target="_blank" class="text-blue-500 underline">Event Link</a></div>` : ''}
+        ${ev.link
+            ? `<div><a href="${ev.link}" target="_blank" class="text-blue-500 underline">Event Link</a></div>`
+            : ""
+          }
       `;
         pastEl.appendChild(card);
       });
     }
 
-    document.getElementById('upcomingBtn').addEventListener('click', () => {
-      document.getElementById('upcomingList').classList.remove('hidden');
-      document.getElementById('pastList').classList.add('hidden');
-      document.getElementById('upcomingBtn').classList.add('bg-[var(--accent)]');
-      document.getElementById('pastBtn').classList.remove('bg-[var(--accent)]');
+    document.getElementById("upcomingBtn").addEventListener("click", () => {
+      document.getElementById("upcomingList").classList.remove("hidden");
+      document.getElementById("pastList").classList.add("hidden");
+      document
+        .getElementById("upcomingBtn")
+        .classList.add("bg-[var(--accent)]");
+      document
+        .getElementById("pastBtn")
+        .classList.remove("bg-[var(--accent)]");
     });
-    document.getElementById('pastBtn').addEventListener('click', () => {
-      document.getElementById('pastList').classList.remove('hidden');
-      document.getElementById('upcomingList').classList.add('hidden');
-      document.getElementById('pastBtn').classList.add('bg-[var(--accent)]');
-      document.getElementById('upcomingBtn').classList.remove('bg-[var(--accent)]');
+    document.getElementById("pastBtn").addEventListener("click", () => {
+      document.getElementById("pastList").classList.remove("hidden");
+      document.getElementById("upcomingList").classList.add("hidden");
+      document.getElementById("pastBtn").classList.add("bg-[var(--accent)]");
+      document
+        .getElementById("upcomingBtn")
+        .classList.remove("bg-[var(--accent)]");
     });
 
     const q = query(eventsColl, orderBy("date", "asc"));
-    onSnapshot(q, snap => {
-      const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      const today = new Date(); today.setHours(0, 0, 0, 0);
-      const upcoming = docs.filter(e => parseDateLocal(e.date) >= today);
-      const past = docs.filter(e => parseDateLocal(e.date) < today).reverse();
-      renderEventsInto(upcoming, past);
-    }, err => {
-      console.error('Firestore snapshot error', err);
-      document.getElementById('upcomingList').innerHTML = '<div class="text-red-400">Could not load shows.</div>';
-    });
+    onSnapshot(
+      q,
+      (snap) => {
+        const docs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const upcoming = docs.filter((e) => parseDateLocal(e.date) >= today);
+        const past = docs
+          .filter((e) => parseDateLocal(e.date) < today)
+          .reverse();
+        renderEventsInto(upcoming, past);
+      },
+      (err) => {
+        console.error("Firestore snapshot error", err);
+        document.getElementById("upcomingList").innerHTML =
+          '<div class="text-red-400">Could not load shows.</div>';
+      }
+    );
 
-    document.getElementById('upcomingBtn').click();
+    document.getElementById("upcomingBtn").click();
   </script>
 
   <script>
-    document.getElementById('yt-thumbs').addEventListener('click', e => {
-      if (e.target.tagName === 'BUTTON') {
-        const videoId = e.target.getAttribute('data-video');
-        document.getElementById('yt-embed').src = `https://www.youtube.com/embed/${videoId}`;
+    document.getElementById("yt-thumbs").addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") {
+        const videoId = e.target.getAttribute("data-video");
+        document.getElementById(
+          "yt-embed"
+        ).src = `https://www.youtube.com/embed/${videoId}`;
       }
     });
   </script>
@@ -331,100 +481,122 @@
     class="fixed inset-0 bg-black/90 z-[9999] flex items-center justify-center p-6 hidden transition-opacity duration-300">
     <div
       class="bg-zinc-900 border border-white/10 rounded-lg max-w-3xl w-full p-8 relative max-h-[90vh] overflow-y-auto">
-      <button id="closeBookingsModal"
-        class="absolute top-4 right-4 text-xl text-gray-400 hover:text-white">&times;</button>
+      <button id="closeBookingsModal" class="absolute top-4 right-4 text-xl text-gray-400 hover:text-white">
+        &times;
+      </button>
 
-      <h3 class="text-3xl font-bold mb-4 border-b border-gray-700 pb-2">Velozza Press & Booking Kit</h3>
+      <h3 class="text-3xl font-bold mb-4 border-b border-gray-700 pb-2">
+        Velozza Press & Booking Kit
+      </h3>
       <div class="mb-6">
-        <p class="text-gray-300 mt-2 text-sm">For bookings & press: <a href="mailto:velozza@outlook.com"
-            class="underline">velozza@outlook.com</a></p>
-        <p class="text-gray-300 mt-2 text-sm">(Rates available upon request)</p>
+        <p class="text-gray-300 mt-2 text-sm">
+          For bookings & press:
+          <a href="mailto:velozza@outlook.com" class="underline">velozza@outlook.com</a>
+        </p>
+        <p class="text-gray-300 mt-2 text-sm">
+          (Rates available upon request)
+        </p>
+      </div>
+      <div class="mb-6">
+        <h4 class="text-white-300 mt-2 text-sm">VELOZZA is a force to be reckoned with, born in the heart of the Dutch
+          thrash metal scene. Formed in Roermond in 2016, the band quickly established their presence with an impressive
+          amount of high-quality studio material. They also stand out for their busy schedule, featuring numerous
+          interesting performances with (inter)national bands both at home and abroad.
+          Expect raw, uncompromising thrash metal, channeling the pure, fast energy of the '80s masters while carving
+          out a crushing, distinctive identity of their own. For fans of Slayer, Kreator, and Havok,
+          VELOZZA is the essential live act that guarantees a mosh pit.</h4>
       </div>
       <div class="mb-6">
         <h4 class="text-xl font-semibold mb-2">Official Bio</h4>
         <a href="materiaal/Velozza - Bio.pdf" target="_blank"
           class="inline-block px-4 py-2 bg-[#d11a12] text-white rounded font-medium hover:bg-red-700 transition">
-          <svg xmlns="https://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor" class="w-5 h-5 inline-block mr-2 align-text-bottom">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12-3 3m0 0 3 3m-3-3h12a2.25 2.25 0 002.25-2.25v-2.625c0-.621-.504-1.125-1.125-1.125H10.5m-3.75 7.5v-7.5m7.5 7.5v-7.5" />
-          </svg>
+          <img src="materiaal/icons/download-cloud.svg" alt="Download Icon"
+            class="w-5 h-5 inline-block mr-2 align-text-bottom" />
           Download Bio (PDF)
         </a>
       </div>
 
-    <h4 class="text-xl font-semibold mb-4">Official Press Photos</h4>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-        
+      <h4 class="text-xl font-semibold mb-4">Official Press Photos</h4>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div class="col-span-2 md:col-span-3 mb-2">
           <img src="materiaal/velozza-022.jpeg" alt="Velozza Group"
             class="w-full rounded-lg shadow-lg object-cover max-h-100" />
-          <p class="text-xs text-gray-500 mt-0.5 text-center">Velozza (Full Band)</p>
+          <p class="text-xs text-gray-500 mt-0.5 text-center">
+            Velozza (Full Band)
+          </p>
         </div>
         <div class="col-span-2 md:col-span-3 mb-2">
-          <img src="materiaal/velozza-banner.png" alt="Velozza Group"
+          <img src="materiaal/velozza-banner.jpg" alt="Velozza Group"
             class="w-full rounded-lg shadow-lg object-cover max-h-80" />
-          <p class="text-xs text-gray-500 mt-0.5 text-center">Velozza (banner)</p>
+          <p class="text-xs text-gray-500 mt-0.5 text-center">
+            Velozza (banner)
+          </p>
         </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 col-span-2 md:col-span-3 mt-1">
 
-            <div class="w-full">
-              <img src="materiaal/Velozza - members/Velozza - jos.jpg" alt="Jos" class="w-full h-auto rounded-lg shadow-md" />
-              <p class="text-xs text-gray-500 mt-0.5 text-center">Jos (Guitar/Vocals)</p>
-            </div>
-            
-            <div class="w-full">
-              <img src="materiaal/Velozza - members/Velozza - bas.jpg" alt="Bas" class="w-full h-auto rounded-lg shadow-md" />
-              <p class="text-xs text-gray-500 mt-0.5 text-center">Bas (Lead Guitar)</p>
-            </div>
-            
-            <div class="w-full">
-              <img src="materiaal/Velozza - members/Velozza - rob.jpg" alt="Rob" class="w-full h-auto rounded-lg shadow-md" />
-              <p class="text-xs text-gray-500 mt-0.5 text-center">Rob (Drums)</p>
-            </div>
-            
-            <div class="w-full">
-              <img src="materiaal/Velozza - members/Velozza - ron.jpg" alt="Ron" class="w-full h-auto rounded-lg shadow-md" />
-              <p class="text-xs text-gray-500 mt-0.5 text-center">Ron (Bass)</p>
-            </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 col-span-2 md:col-span-3 mt-1">
+          <div class="aspect-square w-full">
+            <img src="materiaal/Velozza - members/Velozza - bas.jpg" alt="Bas"
+              class="w-full h-full rounded-lg shadow-md object-cover" />
+            <p class="text-xs text-gray-500 mt-0.5 text-center">
+              Bas (Lead Guitar)
+            </p>
+          </div>
+
+          <div class="aspect-square w-full">
+            <img src="materiaal/Velozza - members/Velozza - rob.jpg" alt="Rob"
+              class="w-full h-full rounded-lg shadow-md object-cover" />
+            <p class="text-xs text-gray-500 mt-0.5 text-center">
+              Rob (Drums)
+            </p>
+          </div>
+
+          <div class="aspect-square w-full">
+            <img src="materiaal/Velozza - members/Velozza - jos.jpg" alt="Jos"
+              class="w-full h-full rounded-lg shadow-md object-cover" />
+            <p class="text-xs text-gray-500 mt-0.5 text-center">
+              Jos (Guitar/Vocals)
+            </p>
+          </div>
+
+          <div class="aspect-square w-full">
+            <img src="materiaal/Velozza - members/Velozza - ron.jpg" alt="Ron"
+              class="w-full h-full rounded-lg shadow-md object-cover" />
+            <p class="text-xs text-gray-500 mt-0.5 text-center">Ron (Bass)</p>
+          </div>
         </div>
-    </div>
+      </div>
 
       <div class="mt-8 pt-4 border-t border-gray-700 text-center">
         <a href="materiaal/Velozza - presskit.zip" download
           class="inline-flex items-center justify-center px-8 py-4 bg-zinc-800 border border-white/20 text-white rounded-lg font-bold hover:bg-[#d11a12] hover:border-[#d11a12] transition duration-300 w-full md:w-auto">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-            class="w-6 h-6 mr-3">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M9 13.5l3 3m0 0l3-3m-3 3v-6m0-4.5h.008v.008H12m-6.53 17.25h13.06c1.192 0 2.21-1.018 2.21-2.21v-8.25c0-1.192-1.018-2.21-2.21-2.21H7.47c-1.192 0-2.21 1.018-2.21 2.21v8.25c0 1.192 1.018 2.21 2.21 2.21z" />
-          </svg>
+          <img src="materiaal/icons/download.svg" alt="Download Icon"
+            class="w-5 h-5 inline-block mr-2 align-text-bottom" />
           DOWNLOAD FULL PRESS KIT (ZIP)
         </a>
       </div>
     </div>
     <script>
-      const openBtn = document.getElementById('openBookingsModal');
-      const closeBtn = document.getElementById('closeBookingsModal');
-      const modal = document.getElementById('bookingsModal');
+      const openBtn = document.getElementById("openBookingsModal");
+      const closeBtn = document.getElementById("closeBookingsModal");
+      const modal = document.getElementById("bookingsModal");
 
       function openModal() {
-        modal.classList.remove('hidden');
+        modal.classList.remove("hidden");
         // Optional: Add a class for fade-in effect if needed
       }
 
       function closeModal() {
-        modal.classList.add('hidden');
+        modal.classList.add("hidden");
       }
 
       // Open the modal when the Bookings button is clicked
-      openBtn.addEventListener('click', openModal);
+      openBtn.addEventListener("click", openModal);
 
       // Close the modal when the X button is clicked
-      closeBtn.addEventListener('click', closeModal);
+      closeBtn.addEventListener("click", closeModal);
 
       // Close the modal when clicking outside the content area
-      modal.addEventListener('click', (e) => {
+      modal.addEventListener("click", (e) => {
         // Check if the click occurred directly on the modal backdrop (not on the content inside)
         if (e.target === modal) {
           closeModal();
@@ -433,7 +605,7 @@
     </script>
     <script>
       let lastScrollY = window.scrollY;
-      const header = document.getElementById('mainHeader');
+      const header = document.getElementById("mainHeader");
 
       const scrollThreshold = 200;
 
@@ -442,26 +614,28 @@
 
         if (currentScrollY > scrollThreshold) {
           if (currentScrollY > lastScrollY) {
-            header.classList.add('header-hidden');
-          }
-          else if (currentScrollY < lastScrollY) {
-            header.classList.remove('header-hidden');
+            header.classList.add("header-hidden");
+          } else if (currentScrollY < lastScrollY) {
+            header.classList.remove("header-hidden");
           }
         }
 
-        if (currentScrollY <= scrollThreshold && !header.classList.contains('header-hidden')) {
-          header.classList.remove('header-hidden');
+        if (
+          currentScrollY <= scrollThreshold &&
+          !header.classList.contains("header-hidden")
+        ) {
+          header.classList.remove("header-hidden");
         }
 
         lastScrollY = currentScrollY;
       }
 
-      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener("scroll", handleScroll, { passive: true });
     </script>
 
     <script>
       // Get the elements
-      const mainHeader = document.getElementById('mainHeader');
+      const mainHeader = document.getElementById("mainHeader");
 
       // Define the scroll threshold for when the background should change
       const backgroundThreshold = 100;
@@ -470,20 +644,151 @@
         // Check if the user has scrolled past the threshold
         if (window.scrollY > backgroundThreshold) {
           // SCROLLED DOWN: Add black, slightly transparent background and shadow
-          mainHeader.classList.add('bg-black/80', 'shadow-lg');
+          mainHeader.classList.add("bg-black/80", "shadow-lg");
         } else {
           // AT TOP: Remove background, make it transparent
-          mainHeader.classList.remove('bg-black/80', 'shadow-lg');
+          mainHeader.classList.remove("bg-black/80", "shadow-lg");
         }
       }
 
       // Attach the new function to the scroll event
-      window.addEventListener('scroll', updateHeaderBackground, { passive: true });
+      window.addEventListener("scroll", updateHeaderBackground, {
+        passive: true,
+      });
 
       // Run once on load to ensure initial state is correct if the page loads scrolled
       updateHeaderBackground();
     </script>
   </div>
+  <button id="backToTopBtn" 
+    class="
+        fixed bottom-6 right-6 z-[1000] 
+        w-12 h-12 rounded-md 
+        bg-black/70 hover:bg-[#d11a12] 
+        text-white 
+        flex items-center justify-center 
+        transition-all duration-300 
+        opacity-0 pointer-events-none 
+        shadow-xl
+    "
+    title="Scroll naar boven"
+>
+    <img src="materiaal/icons/arrow-up.svg" alt="Pijl omhoog" class="w-6 h-6" />
+</button>
+<script>
+    // Haal de knop op
+    const backToTopBtn = document.getElementById('backToTopBtn');
+
+    // De functie om de knop te tonen/verbergen
+    function toggleBackToTopButton() {
+        // Bereken de scroll drempel: 50% van de pagina hoogte
+        const pageHeight = document.body.scrollHeight;
+        const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+        const threshold = pageHeight / 4; // Knop verschijnt na 50% scrollen
+
+        if (scrollPosition > threshold) {
+            // Knop tonen: verhoog de opaciteit en maak hem klikbaar
+            backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+            backToTopBtn.classList.add('opacity-100');
+        } else {
+            // Knop verbergen
+            backToTopBtn.classList.remove('opacity-100');
+            backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+        }
+    }
+
+    // De functie om terug naar de top te scrollen (smooth)
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Voor een vloeiende animatie
+        });
+    }
+
+    // Luister naar scroll events
+    window.addEventListener('scroll', toggleBackToTopButton, { passive: true });
+
+    // Luister naar klik events op de knop
+    backToTopBtn.addEventListener('click', scrollToTop);
+    
+    // Optioneel: Controleer de positie direct bij het laden van de pagina
+    toggleBackToTopButton();
+</script>
+<div id="secretVideoContainer" class="fixed inset-0 z-[10000] flex items-center justify-center pointer-events-none hidden">
+</div>
+<script>
+    const logo = document.getElementById('headerLogo');
+    const secretVideoContainer = document.getElementById('secretVideoContainer');
+    let clickCount = 0;
+    let clickTimer;
+    const clickThreshold = 3;
+    const resetDelay = 800; // Time (ms) to wait between clicks before resetting the counter
+
+    // The video file and dimensions
+    const secretVideoSrc = 'materiaal/stamp-dich.mp4';
+    const videoWidth = '40px';
+    const videoHeight = '40px';
+    
+    function showSecretVideo() {
+        // 1. Prepare the container
+        secretVideoContainer.classList.remove('hidden');
+        
+        // 2. Create the video element
+        const video = document.createElement('video');
+        video.src = secretVideoSrc;
+        video.width = videoWidth;
+        video.height = videoHeight;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.loop = false;
+        video.style.borderRadius = '5px';
+        video.style.objectFit = 'cover';
+        video.classList.add('shadow-xl', 'glow'); // Use existing styles for a nice effect
+
+        secretVideoContainer.appendChild(video);
+
+        // 3. Define what happens when the video ends
+        video.onended = () => {
+            // Cleanup: remove the video and hide the container
+            video.remove();
+            secretVideoContainer.classList.add('hidden');
+        };
+        
+        // (Optional: Fallback stop in case onended doesn't fire correctly)
+        // setTimeout(() => {
+        //     video.onended();
+        // }, 10000); // If the video is 10 seconds, set a timeout slightly longer
+    }
+
+    // Main click handling function
+    logo.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent default link behavior if the logo was a link
+
+        // 1. Clear the previous timer (this is the key to tracking clicks "in a row")
+        clearTimeout(clickTimer);
+        
+        // 2. Increment the count
+        clickCount++;
+
+        if (clickCount >= clickThreshold) {
+            // Trigger the secret video
+            showSecretVideo();
+            
+            // Reset the counter immediately after playing
+            clickCount = 0;
+            
+        } else {
+            // 3. Set a new timer to reset the count if the user doesn't click again quickly
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+                // console.log("Click count reset."); // For testing
+            }, resetDelay);
+            
+             console.log(`Click: ${clickCount}`); // For testing
+        }
+    });
+
+</script>
 </body>
 
 </html>
