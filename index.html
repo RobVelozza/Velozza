@@ -98,7 +98,7 @@
       <div class="max-w-6xl mx-auto px-12 py-4">
         <nav class="flex items-center justify-between">
           <div class="flex items-center gap-4">
-            <img id="headerLogo" src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza" class="h-16 glow cursor-pointer" />
+            <img id="headerLogo" src="materiaal/velozza_distressed_logo-transparant2.webp" alt="Velozza" class="h-16 glow cursor-pointer" />
             <div class="text-sm text-gray-300">
               Velozza — Thrash Metal from Roermond
             </div>
@@ -146,9 +146,10 @@
     </header>
 
     <div class="hero-logo absolute inset-0 flex items-center justify-center">
-      <img src="materiaal/velozza_distressed_logo-transparant2.png" alt="Velozza Logo"
+      <img src="materiaal/velozza_distressed_logo-transparant2.webp" alt="Velozza Logo"
         class="w-full max-w-[700px] glow" />
     </div>
+
     <div class="absolute inset-0 flex flex-col items-center justify-end pb-20 z-30">
       <p class="mt-6 text-gray-300 max-w-2xl mx-auto">
         Raw, uncompromising thrash from Roermond. New full-length album coming
@@ -173,15 +174,17 @@
 
   <img 
     src="materiaal/icons/border1.png" 
-    class="w-full h-16 object-cover rotate-180 overlap-border relative z-10 mt-[0px] mb-[-30px]" 
+    class="w-full h-16 object-cover rotate-180 overlap-border relative z-10 mt-[0px] mb-[-40px]" 
   />
 
 
 <section 
   id="about" 
-  class="relative bg-[url('materiaal/velozza-banner.jpg')] bg-cover bg-center bg-no-repeat"
+  class="relative bg-[url('materiaal/velozza-banner.webp')] bg-cover bg-center bg-no-repeat"
 >
-  <div class="max-w-6xl mx-auto px-6 py-24"> 
+  <div class="absolute inset-0 bg-black/60 z-5"></div> 
+
+  <div class="max-w-6xl mx-auto px-6 py-24 relative z-20"> 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
       <div class="md:col-span-2">
         <h2 class="text-3xl font-semibold">About Velozza</h2>
@@ -208,7 +211,7 @@
 
   <img 
     src="materiaal/icons/border1.png" 
-    class="w-full h-16 object-cover overlap-border mt-[-30px]" 
+    class="w-full h-16 object-cover overlap-border mt-[-45px]" 
   />
 
 
@@ -275,18 +278,23 @@
     class="w-full h-16 object-cover overlap-border" 
   />
 
-  <section id="merch" class="border-t border-white/5 py-12">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h3 class="text-2xl font-semibold mb-4">Merchandise</h3>
-      <p class="text-gray-300 mb-6">
-        Official Velozza merchandise — shirts, caps, and more available
-        through Bandcamp.
-      </p>
-      <a href="https://velozza.bandcamp.com/merch" target="_blank"
-        class="inline-block px-8 py-3 bg-[var(--accent)] text-white rounded font-semibold hover:bg-red-700 transition">Visit
-        Merch Store</a>
-    </div>
-  </section>
+<section 
+  id="merch" 
+  class="relative py-12 bg-[url('materiaal/Merchandise-achtergrond.webp')] bg-cover bg-center bg-no-repeat"
+>
+  <div class="absolute inset-0 bg-black/80 z-5"></div>
+
+  <div class="max-w-6xl mx-auto px-6 text-center relative z-20">
+    <h3 class="text-2xl font-semibold mb-4">Merchandise</h3>
+    <p class="text-gray-300 mb-6">
+      Official Velozza merchandise — shirts, caps, and more available
+      through Bandcamp.
+    </p>
+    <a href="https://velozza.bandcamp.com/merch" target="_blank"
+      class="inline-block px-8 py-3 bg-[var(--accent)] text-white rounded font-semibold hover:bg-red-700 transition">Visit
+      Merch Store</a>
+  </div>
+</section>
 
   <img 
     src="materiaal/icons/border1.png" 
@@ -343,7 +351,7 @@
       orderBy,
     } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-    // 🔥 Firebase config
+    // Firebase config
     const firebaseConfig = {
       apiKey: "AIzaSyAj7nzvflTuXerUQ9LzOnn7TRojw4ZHlkc",
       authDomain: "velozza-events.firebaseapp.com",
@@ -490,7 +498,7 @@
       </h3>
       <div class="mb-6">
         <p class="text-gray-300 mt-2 text-sm">
-          For bookings & press:
+          For bookings & press: 
           <a href="mailto:velozza@outlook.com" class="underline">velozza@outlook.com</a>
         </p>
         <p class="text-gray-300 mt-2 text-sm">
@@ -519,14 +527,14 @@
       <h4 class="text-xl font-semibold mb-4">Official Press Photos</h4>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div class="col-span-2 md:col-span-3 mb-2">
-          <img src="materiaal/velozza-022.jpeg" alt="Velozza Group"
+          <img src="materiaal/velozza-022.webp" alt="Velozza Group"
             class="w-full rounded-lg shadow-lg object-cover max-h-100" />
           <p class="text-xs text-gray-500 mt-0.5 text-center">
             Velozza (Full Band)
           </p>
         </div>
         <div class="col-span-2 md:col-span-3 mb-2">
-          <img src="materiaal/velozza-banner.jpg" alt="Velozza Group"
+          <img src="materiaal/velozza-banner.webp" alt="Velozza Group"
             class="w-full rounded-lg shadow-lg object-cover max-h-80" />
           <p class="text-xs text-gray-500 mt-0.5 text-center">
             Velozza (banner)
@@ -535,7 +543,7 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 col-span-2 md:col-span-3 mt-1">
           <div class="aspect-square w-full">
-            <img src="materiaal/Velozza - members/Velozza - bas.jpg" alt="Bas"
+            <img src="materiaal/Velozza - members/velozza-bas.webp" alt="Bas"
               class="w-full h-full rounded-lg shadow-md object-cover" />
             <p class="text-xs text-gray-500 mt-0.5 text-center">
               Bas (Lead Guitar)
@@ -543,7 +551,7 @@
           </div>
 
           <div class="aspect-square w-full">
-            <img src="materiaal/Velozza - members/Velozza - rob.jpg" alt="Rob"
+            <img src="materiaal/Velozza - members/velozza-rob.webp" alt="Rob"
               class="w-full h-full rounded-lg shadow-md object-cover" />
             <p class="text-xs text-gray-500 mt-0.5 text-center">
               Rob (Drums)
@@ -551,7 +559,7 @@
           </div>
 
           <div class="aspect-square w-full">
-            <img src="materiaal/Velozza - members/Velozza - jos.jpg" alt="Jos"
+            <img src="materiaal/Velozza - members/velozza-jos.webp" alt="Jos"
               class="w-full h-full rounded-lg shadow-md object-cover" />
             <p class="text-xs text-gray-500 mt-0.5 text-center">
               Jos (Guitar/Vocals)
@@ -559,7 +567,7 @@
           </div>
 
           <div class="aspect-square w-full">
-            <img src="materiaal/Velozza - members/Velozza - ron.jpg" alt="Ron"
+            <img src="materiaal/Velozza - members/velozza-ron.webp" alt="Ron"
               class="w-full h-full rounded-lg shadow-md object-cover" />
             <p class="text-xs text-gray-500 mt-0.5 text-center">Ron (Bass)</p>
           </div>
