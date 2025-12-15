@@ -5,11 +5,85 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Velozza — Official</title>
-  <link rel="stylesheet" href="./style.css">
   <link rel="icon" type="image/png" href="materiaal/favicon.png" sizes="192x192" />
 
   <link rel="apple-touch-icon" href="materiaal/favicon.png" />
 
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --accent: #d11a12;
+      --muted: #050505;
+    }
+
+    body {
+      background: #050505;
+      color: #eee;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial;
+    }
+
+    .glow {
+      filter: drop-shadow(0 6px 20px rgba(209, 26, 18, 0.25));
+    }
+
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .small {
+      font-size: 0.95rem;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+      z-index: 2;
+    }
+
+    .hero-logo {
+      position: relative;
+      z-index: 3;
+    }
+
+    .header-hidden {
+      transform: translateY(-100%);
+    }
+
+    .overlap-border {
+      margin-top: -32px; 
+      margin-bottom: -32px;
+      position: relative;
+      z-index: 10;
+    }
+  </style>
 </head>
 
 <body class="antialiased leading-relaxed">
@@ -70,7 +144,7 @@
       </div>
     </header>
 
-    <div class="hero-logo absolute inset-0 flex items-center justify-center pt-20">
+    <div class="hero-logo absolute inset-0 flex items-center justify-center">
       <img src="materiaal/velozza_distressed_logo-transparant2.webp" alt="Velozza Logo"
         class="w-full max-w-[700px] glow" />
     </div>
@@ -98,7 +172,8 @@
   </section>
 
   <img src="materiaal/icons/border1.png"
-    class="w-full h-16 object-cover rotate-180 relative z-10 mt-[0px] mb-[-40px]" />
+    class="w-full h-16 object-cover rotate-180 overlap-border relative z-10 mt-[0px] mb-[-40px]" />
+
 
   <section id="about" class="relative bg-[url('materiaal/velozza-banner.webp')] bg-cover bg-center bg-no-repeat">
     <div class="absolute inset-0 bg-black/60 z-5"></div>
@@ -361,5 +436,4 @@
 
   <script src="script.js" type="module"></script>
 </body>
-
 </html>
