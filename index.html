@@ -78,7 +78,7 @@
     }
 
     .overlap-border {
-      margin-top: -32px; 
+      margin-top: -32px;
       margin-bottom: -32px;
       position: relative;
       z-index: 10;
@@ -213,8 +213,11 @@
         <div>
           <h4 class="text-sm uppercase text-gray-400 mb-3">Spotify</h4>
           <div class="rounded overflow-hidden border border-white/5">
-            <iframe src="https://open.spotify.com/embed/artist/1jnRNkkxVD5IHcPbOa3u0W" width="100%" height="380"
-              frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <iframe data-testid="embed-iframe" style="border-radius:12px"
+              src="https://open.spotify.com/embed/artist/1jnRNkkxVD5IHcPbOa3u0W?utm_source=generator&theme=0"
+              width="100%" height="352" frameBorder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
           </div>
         </div>
 
@@ -436,4 +439,5 @@
 
   <script src="script.js" type="module"></script>
 </body>
+
 </html>

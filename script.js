@@ -7,7 +7,6 @@ import {
     orderBy,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-// --- Firebase Configuration ---
 const firebaseConfig = {
     apiKey: "AIzaSyAj7nzvflTuXerUQ9LzOnn7TRojw4ZHlkc",
     authDomain: "velozza-events.firebaseapp.com",
@@ -22,7 +21,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const eventsColl = collection(db, "events");
 
-// --- Utility Functions ---
 function parseDateLocal(dstr) {
     const [y, m, day] = dstr.split("-").map(Number);
     return new Date(y, m - 1, day, 0, 0, 0, 0);
