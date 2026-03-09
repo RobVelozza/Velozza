@@ -20,14 +20,19 @@
   <!-- LOGIN -->
   <div id="loginBox" class="space-y-4">
     <h2 class="text-xl font-semibold">Login</h2>
+    <input type="email" id="mailInput" placeholder="Enter admin email"
+      class="w-full p-3 bg-zinc-900 border border-zinc-700 rounded" />
     <input type="password" id="passwordInput" placeholder="Enter admin password"
       class="w-full p-3 bg-zinc-900 border border-zinc-700 rounded" />
     <button id="loginBtn" class="px-4 py-2 bg-[var(--accent)] rounded hover:bg-red-700">Login</button>
-    <p id="loginError" class="text-red-500"></p>
+    <p id="authStatus" class="text-sm mt-2 text-zinc-400"></p>
   </div>
 
   <!-- ADMIN PANEL -->
   <div id="adminPanel" class="hidden mt-10 space-y-6">
+    <button id="logoutBtn" class="px-4 py-2 bg-[var(--accent)] rounded hover:bg-red-700">
+      Log Out
+    </button>
     <section>
       <h2 class="text-2xl font-semibold text-gray-200">Add Event</h2>
       <div class="grid grid-cols-1 gap-3 mt-4">
@@ -91,6 +96,8 @@
       query,
       orderBy
     } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
 
     const firebaseConfig = {
       apiKey: "AIzaSyAj7nzvflTuXerUQ9LzOnn7TRojw4ZHlkc",
@@ -104,12 +111,15 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const auth = getAuth();
 
     // Element refs
     const loginBox = document.getElementById('loginBox');
     const adminPanel = document.getElementById('adminPanel');
-    const loginError = document.getElementById('loginError');
+    const authStatus = document.getElementById('authStatus');
+    const logoutBtn = document.getElementById('logoutBtn');
 
+    const mailInput = document.getElementById('mailInput');
     const passwordInput = document.getElementById('passwordInput');
     const loginBtn = document.getElementById('loginBtn');
 
@@ -140,15 +150,45 @@
 
     let currentEditId = null;
 
-    loginBtn.addEventListener('click', () => {
-      const pwd = passwordInput.value.trim();
-      if (pwd === 'R7pX92fGq4mT8bLd') {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
         loginBox.classList.add('hidden');
         adminPanel.classList.remove('hidden');
+        logoutBtn.classList.remove('hidden'); // Show logout
         setupRealtimeList();
       } else {
-        loginError.textContent = 'Incorrect password.';
+        loginBox.classList.remove('hidden');
+        adminPanel.classList.add('hidden');
+        logoutBtn.classList.add('hidden'); // Hide logout
+        eventList.innerHTML = ''; 
       }
+    });
+
+    // Authentication
+    loginBtn.addEventListener('click', async () => {
+      const email = mailInput.value.trim();
+      const pwd = passwordInput.value.trim();
+
+      if (!email || !pwd) {
+        authStatus.textContent = "⚠️ Enter email and password.";
+        return;
+      }
+
+      authStatus.textContent = "⏳ Logging in...";
+      try {
+        await signInWithEmailAndPassword(auth, email, pwd);
+      } catch (error) {
+        authStatus.textContent = `❌ ${error.message}`;
+      }
+    });
+
+    // The Logout Action
+    logoutBtn.addEventListener('click', () => {
+      signOut(auth).then(() => {
+        authStatus.textContent = "Logged out successfully.";
+      }).catch((error) => {
+        console.error("Sign out error", error);
+      });
     });
 
     saveEvent.addEventListener('click', async () => {
